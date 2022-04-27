@@ -23,9 +23,45 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper(m) {
+	let sum = [];
+	m.forEach( (el1, i1, arr1) => {
+		sum.push([]);
+		el1.forEach( (el2, i2) => {
+
+			let bomb = 0;
+			if(arr1[i1 - 1] !== undefined) {
+				if(arr1[i1 - 1][i2 - 1] !== undefined) {
+					if(arr1[i1 - 1][i2 - 1]) bomb += 1;
+				}
+				if(arr1[i1 - 1][i2] !== undefined) {
+					if(arr1[i1 - 1][i2]) bomb += 1;
+				}
+				if(arr1[i1 - 1][i2 + 1] !== undefined) {
+					if(arr1[i1 - 1][i2 + 1]) bomb += 1;
+				}
+			}
+			if(arr1[i1][i2 - 1] !== undefined) {
+				if(arr1[i1][i2 - 1]) bomb += 1;
+			}
+			if(arr1[i1][i2 + 1] !== undefined) {
+				if(arr1[i1][i2 + 1]) bomb += 1;
+			}
+			if(arr1[i1 + 1] !== undefined) {
+				if(arr1[i1 + 1][i2 - 1] !== undefined) {
+					if(arr1[i1 + 1][i2 - 1]) bomb += 1;
+				}
+				if(arr1[i1 + 1][i2] !== undefined) {
+					if(arr1[i1 + 1][i2]) bomb += 1;
+				}
+				if(arr1[i1 + 1][i2 + 1] !== undefined) {
+					if(arr1[i1 + 1][i2 + 1]) bomb += 1;
+				}
+			}
+			sum[i1][i2] = bomb;
+		} );
+	} );
+	return sum;
 }
 
 module.exports = {
